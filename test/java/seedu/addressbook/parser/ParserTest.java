@@ -174,6 +174,46 @@ public class ParserTest {
                 parseAndAssertCommandType(input, FindCommand.class);
         assertEquals(keySet, result.getKeywords());
     }
+    
+    /**
+     * Test find persons by keyword in tag command
+     */
+    
+    @Test
+    public void findByTagCommand_invalidArgs() {
+        // no keywords
+        final String[] inputs = {
+                "findtag",
+                "findtag "
+        };
+        final String resultMessage =
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindByTagCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
+    public void findByTagCommand_validArgs_parsedCorrectly() {
+        final String[] keywords = { "key1", "key2", "key3" };
+        final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
+
+        final String input = "findtag " + String.join(" ", keySet);
+        final FindByTagCommand result =
+                parseAndAssertCommandType(input, FindByTagCommand.class);
+        assertEquals(keySet, result.getKeywords());
+    }
+
+    @Test
+    public void findByTagCommand_duplicateKeys_parsedCorrectly() {
+        final String[] keywords = { "key1", "key2", "key3" };
+        final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
+
+        // duplicate every keyword
+        final String input = "findtag " + String.join(" ", keySet) + " " + String.join(" ", keySet);
+        final FindByTagCommand result =
+                parseAndAssertCommandType(input, FindByTagCommand.class);
+        assertEquals(keySet, result.getKeywords());
+    }
+  
 
     /**
      * Test add person command
