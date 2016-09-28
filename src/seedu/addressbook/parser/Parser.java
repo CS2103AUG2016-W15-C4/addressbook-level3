@@ -270,8 +270,6 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
     
-<<<<<<< HEAD
-    
     /**
      * Parses arguments in the context of the find person by tag command.
      *
@@ -289,10 +287,5 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindByTagCommand(keywordSet);
-        
     }
-
-
-=======
->>>>>>> 3eeaa2e62e84f7bc772ac3879137a318b9ab8e23
 }

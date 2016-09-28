@@ -22,7 +22,7 @@ public class FindByAddressCommand extends Command {
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" + "Finds all persons who have these address  "
 			+ " and displays them as a list with index numbers.\n\t"
 			+ "Parameters: KEYWORD [MORE_KEYWORDS]...\n\t"
-			+ "Example: " + COMMAND_WORD + "New Gate";
+			+ "Example: " + COMMAND_WORD + " New Gate";
 
 	private final Set<String> keywords;
 

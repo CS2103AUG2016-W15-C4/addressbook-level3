@@ -54,6 +54,18 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
+## Finding all persons with the given contact number: `findPersonByNumber`
+Finds persons with a given contact number.<br>
+Format: `findPersonByNumber NUMBER`
+
+## Finding all persons containing any keyword in their address: `findAddress`
+Finds persons whose address contain any of the given keywords.<br>
+Format: `findAddress KEYWORD [MORE_KEYWORDS]`
+
+## Finding all persons with a given tag: `findtag`
+Finds persons with a given tag.<br>
+Format: `findtag TAG`
+
 ## Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`
