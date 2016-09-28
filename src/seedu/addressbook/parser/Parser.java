@@ -25,8 +25,8 @@ public class Parser {
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
-
+    public static final Pattern ADDRESS_ARGS_FORMAT =
+    		Pattern.compile("(?<address>[^/]+)");
     /**
      * Signals that the user input could not be parsed.
      */
@@ -85,14 +85,36 @@ public class Parser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
-
+                
+            case FindByAddressCommand.COMMAND_WORD:
+            	return prepareFindByAddress(arguments);
+            	
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
                 return new HelpCommand();
         }
     }
-
+    
     /**
+     *  Parses args in context of findByAddress command
+     * @param arguments
+     * @return
+     */
+    private Command prepareFindByAddress(String arguments) {
+		// TODO Auto-generated method stub
+    	final Matcher matcher = ADDRESS_ARGS_FORMAT.matcher(arguments.trim());
+    	
+    	if(!matcher.matches()) {
+    		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindByAddressCommand.MESSAGE_USAGE));
+    	}
+    	
+    	  // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new FindByAddressCommand(keywordSet);
+	}
+
+	/**
      * Parses arguments in the context of the add person command.
      *
      * @param args full command args string

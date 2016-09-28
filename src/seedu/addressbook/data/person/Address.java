@@ -1,5 +1,8 @@
 package seedu.addressbook.data.person;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -54,5 +57,8 @@ public class Address {
 
     public boolean isPrivate() {
         return isPrivate;
+    }
+    public List<String> getAddressInName() {
+        return Arrays.asList(value.split("\\s+"));
     }
 }
