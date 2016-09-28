@@ -82,6 +82,10 @@ public class Parser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+                
+            case FindByContactCommand.COMMAND_WORD:
+                return prepareFindByContact(arguments);
+                
 
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
@@ -191,6 +195,17 @@ public class Parser {
                     ViewAllCommand.MESSAGE_USAGE));
         }
     }
+    
+    /**
+     * Finds the person with the phone number.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareFindByContact(String args){
+        final int targetNumber = Integer.parseInt(args);
+        return new FindByContactCommand(targetNumber);
+}
 
     /**
      * Parses the given arguments string as a single index number.
@@ -227,6 +242,5 @@ public class Parser {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }
-
-
+    
 }
