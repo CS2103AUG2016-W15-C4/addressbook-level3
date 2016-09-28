@@ -71,6 +71,15 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Unmodifiable java List view with elements cast as immutable {@link Tag}s.
+     * For use with other methods/libraries.
+     * Any changes to the internal list/elements are immediately visible in the returned list.
+     */
+    public List<Tag> immutableListView() {
+        return Collections.unmodifiableList(internalList);
+    }
+    
+    /**
      * All tags in this list as a Set. This set is mutable and change-insulated against the internal list.
      */
     public Set<Tag> toSet() {
