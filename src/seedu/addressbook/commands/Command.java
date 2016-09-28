@@ -3,6 +3,7 @@ package seedu.addressbook.commands;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.tag.Tag;
 
 import java.util.List;
 
@@ -34,6 +35,16 @@ public abstract class Command {
      */
     public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
+    }
+    
+    /**
+     * Constructs a feedback message to summarise an operation that displayed a listing of tags.
+     *
+     * @param tagsDisplayed used to generate summary
+     * @return summary message for tags displayed
+     */
+    public static String getMessageForTagListShownSummary(List<? extends Tag> tagsDisplayed) {
+        return String.format(Messages.MESSAGE_TAGS_LISTED_OVERVIEW, tagsDisplayed.size());
     }
 
     /**

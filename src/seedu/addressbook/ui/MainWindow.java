@@ -9,6 +9,7 @@ import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.logic.Logic;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.tag.Tag;
 
 import java.util.List;
 import java.util.Optional;
@@ -81,8 +82,13 @@ public class MainWindow {
     public void displayResult(CommandResult result) {
         clearOutputConsole();
         final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
+        final Optional<List<? extends Tag>> resultTags = result.getRelevantTags();
         if(resultPersons.isPresent()) {
-            display(resultPersons.get());
+            displayPerson(resultPersons.get());
+        }
+        
+        if (resultTags.isPresent()){
+            displayTag(resultTags.get());
         }
         display(result.feedbackToUser);
     }
@@ -96,8 +102,15 @@ public class MainWindow {
      * Displays the list of persons in the output display area, formatted as an indexed list.
      * Private contact details are hidden.
      */
-    private void display(List<? extends ReadOnlyPerson> persons) {
+    private void displayPerson(List<? extends ReadOnlyPerson> persons) {
         display(new Formatter().format(persons));
+    }
+    
+    /**
+     * Displays the list of tags in the output display area, formatted as an indexed list.
+     */
+    private void displayTag(List<? extends Tag> tags) {
+        display(new Formatter().formatTags(tags));
     }
 
     /**
